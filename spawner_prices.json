@@ -1,21 +1,91 @@
 {
-  "updated_at": "2026-01-27T12:56:56Z",
+  "updated_at": "2026-01-27T13:00:46Z",
   "channel_id": "1370076214986801332",
   "source": "Coconut Spawners",
-  "total_prices": 0,
+  "total_prices": 9,
   "prices": {
-    "buying": {}
+    "buying": {
+      "Skeleton": {
+        "price": "2.2m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Iron Golem": {
+        "price": "2.3m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Creeper": {
+        "price": "1m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Spider": {
+        "price": "1m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Zombie Pigman": {
+        "price": "1.1m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Zombie": {
+        "price": "450k",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Blaze": {
+        "price": "1.1m",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Pig": {
+        "price": "450k",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      },
+      "Cow": {
+        "price": "450k",
+        "source_timestamp": "2026-01-24T17:06:51.518000+00:00",
+        "author": "Coconut Spawners"
+      }
+    }
   },
   "raw_messages": [
     {
       "id": "1464667821643534594",
       "content": "",
+      "embeds": [
+        {
+          "type": "rich",
+          "color": 3706428,
+          "author": {
+            "name": "Click here to sell spawners."
+          },
+          "footer": {
+            "text": "TicketTool.xyz - Ticketing without clutter",
+            "icon_url": "https://tickettool.xyz/images/footer.png",
+            "proxy_icon_url": "https://images-ext-1.discordapp.net/external/iRFWZax-j4sQGbZSg9tbK4bS7NNqRlPkR3Kv1YB55jc/https/tickettool.xyz/images/footer.png"
+          },
+          "content_scan_version": 4
+        }
+      ],
       "timestamp": "2026-01-24T17:07:00.892000+00:00",
       "author": "Ticket Tool"
     },
     {
       "id": "1464667782326128722",
       "content": "",
+      "embeds": [
+        {
+          "type": "rich",
+          "title": "<:Spawner:1437512630884634684>  Spawner Prices  <:Spawner:1437512630884634684>",
+          "description": "<:Skeleton:1444073885988294776> - Skeleton: 2.2m <:dollar:1384897659470479451>\n<:Iron_Golem:1444073844976517360> - Iron Golem: 2.3m <:dollar:1384897659470479451>\n<:Creeper:1444073877453148200> - Creeper: 1m <:dollar:1384897659470479451>\n<:Spider:1444073894565646437> - Spider: 1m <:dollar:1384897659470479451>\n<:Zombie_Pigman:1444073863079002294> - Zombie Pigman: 1.1m <:dollar:1384897659470479451>\n<:Zombie:1444073854069641287> - Zombie 450k <:dollar:1384897659470479451>\n<:Blaze:1444073917361815562> - Blaze: 1.1m <:dollar:1384897659470479451>\n<:Pig:1444073904082649240> - Pig: 450k <:dollar:1384897659470479451>\n<:Cow:1444073825343111198> - Cow: 450k <:dollar:1384897659470479451>\n\n- These are the spawners **WE BUY**.\n- Prices are **NOT** negotiable.\n- Only open a ticket if you want to sell **10+ spawners**",
+          "color": 1107532,
+          "content_scan_version": 4
+        }
+      ],
       "timestamp": "2026-01-24T17:06:51.518000+00:00",
       "author": "Coconut Spawners"
     }
