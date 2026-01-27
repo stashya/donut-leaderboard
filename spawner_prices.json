@@ -1,69 +1,23 @@
 {
-  "updated_at": "2025-12-25T01:17:38Z",
-  "channel_id": "1373579452998746155",
-  "total_prices": 10,
+  "updated_at": "2026-01-27T12:56:56Z",
+  "channel_id": "1370076214986801332",
+  "source": "Coconut Spawners",
+  "total_prices": 0,
   "prices": {
-    "buying": {
-      "Skeleton": {
-        "price": "1.3m",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Iron Golem": {
-        "price": "1m",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Zombified Pigman": {
-        "price": "600k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Creeper": {
-        "price": "400k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Blaze": {
-        "price": "400k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Zombie": {
-        "price": "300k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Spider": {
-        "price": "300k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Pig": {
-        "price": "100k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      },
-      "Cow": {
-        "price": "100k",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      }
-    },
-    "selling": {
-      "Skeleton": {
-        "price": "1.6m",
-        "source_timestamp": "2025-12-23T21:34:46.164000+00:00",
-        "author": "driver.dave"
-      }
-    }
+    "buying": {}
   },
   "raw_messages": [
     {
-      "id": "1453138792578945068",
-      "content": "## __<:maccas:1378244052822134864> Spawner Price Listings <:maccas:1378244052822134864>__\n\n**Buying:** ( You Sell To Us )\n> - <:SkeletonFace:1379787344495771698>  Skeleton Spawners **1.3m** each \n> - <:irongolem:1403717038748471337>\ufeff  Iron Golem Spawners **1m** each \n> - <:ZombifiedPiglinFace:1379788021850968166>  Zombified Pigman Spawners **600k** each  \n> - <:CreeperFace:1379787288313204826>  Creeper Spawners **400k** each\n> - <:BlazeFace:1379787226921308180>  Blaze Spawners **400k** each \n> - <:ZombieFace:1379787362254454904>  Zombie Spawners **300k** each \n> - <:spiderhead:1403715996501409893>  Spider Spawners **300k** each \n> - <:PigFace:1379787329056542750>  Pig Spawners **100k** each  \n> - <:CowHead:1379788454447284224>  Cow Spawners **100k** each\n\n**Selling:** ( We Sell To You ) \n> - <:SkeletonFace:1379787344495771698>  Skeleton Spawners **1.6m** each\n### __NOTE__- WE DON'T GO FIRST FOR BUYING/SELLING SPAWNERS MAKE A https://discord.com/channels/1368459126971306026/1373206691092631624\n# WE ONLY BUY 10+ AT ONCE TO AVOID TOO MANY TICKETS",
-      "timestamp": "2025-12-23T21:34:46.164000+00:00",
-      "author": "driver.dave"
+      "id": "1464667821643534594",
+      "content": "",
+      "timestamp": "2026-01-24T17:07:00.892000+00:00",
+      "author": "Ticket Tool"
+    },
+    {
+      "id": "1464667782326128722",
+      "content": "",
+      "timestamp": "2026-01-24T17:06:51.518000+00:00",
+      "author": "Coconut Spawners"
     }
   ]
 }
