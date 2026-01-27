@@ -32,12 +32,12 @@ def fetch_latest_messages(limit=10):
 
 def parse_spawner_prices(messages):
     """
-    Parse spawner prices from messages.
+    Parse spawner prices from message embeds.
     
-    New format:
-    - Skeleton: 2.2m
-    - Iron Golem: 2.3m
-    - Zombie 450k
+    Format in embed description:
+    - Skeleton: 2.2m $
+    - Iron Golem: 2.3m $
+    - Zombie 450k $
     """
     data = {
         "buying": {},   # Prices when WE BUY (you sell to them)
@@ -49,41 +49,53 @@ def parse_spawner_prices(messages):
     # Pattern to match: "- Name: price" or "- Name price"
     # Handles both "Skeleton: 2.2m" and "Zombie 450k" formats
     price_pattern = re.compile(
-        r'-\s*([A-Za-z\s]+?)[:.]?\s*([0-9.]+[kmb]?)\s*(?:\$|$)',
+        r'-\s*([A-Za-z\s]+?)[:.]?\s*([0-9.]+[kmb]?)',
         re.IGNORECASE
     )
     
     for msg in messages:
-        content = msg.get("content", "")
         timestamp = msg.get("timestamp", "")
         author = msg.get("author", {}).get("username", "unknown")
         
-        # Skip if not a price message
-        if "spawner prices" not in content.lower():
-            continue
+        # Check embeds (this is where the prices are!)
+        embeds = msg.get("embeds", [])
         
-        # Remove custom Discord emojis
-        content_clean = emoji_pattern.sub('', content)
-        
-        print(f"Processing message from {author}:")
-        
-        for line in content_clean.split("\n"):
-            match = price_pattern.search(line)
-            if match:
-                spawner_type = match.group(1).strip().title()
-                price = match.group(2).strip().lower()
-                
-                # Skip empty or too short names
-                if not spawner_type or len(spawner_type) < 2:
+        for embed in embeds:
+            title = embed.get("title", "")
+            description = embed.get("description", "")
+            
+            # Debug output
+            print(f"Embed from {author}: title='{title}'")
+            
+            # Skip if not a price embed
+            if "spawner" not in title.lower() and "price" not in title.lower():
+                # Also check description
+                if "spawner" not in description.lower():
                     continue
-                
-                data["buying"][spawner_type] = {
-                    "price": price,
-                    "source_timestamp": timestamp,
-                    "author": author
-                }
-                
-                print(f"  Found: {spawner_type} = {price}")
+            
+            # Remove custom Discord emojis
+            description_clean = emoji_pattern.sub('', description)
+            
+            print(f"Processing embed from {author}:")
+            print(f"  Description preview: {description_clean[:100]}...")
+            
+            for line in description_clean.split("\n"):
+                match = price_pattern.search(line)
+                if match:
+                    spawner_type = match.group(1).strip().title()
+                    price = match.group(2).strip().lower()
+                    
+                    # Skip empty or too short names
+                    if not spawner_type or len(spawner_type) < 2:
+                        continue
+                    
+                    data["buying"][spawner_type] = {
+                        "price": price,
+                        "source_timestamp": timestamp,
+                        "author": author
+                    }
+                    
+                    print(f"  Found: {spawner_type} = {price}")
     
     return data
 
@@ -96,6 +108,13 @@ def main():
         return
     
     print(f"Fetched {len(messages)} messages")
+    
+    # Debug: show what we got
+    for msg in messages:
+        author = msg.get("author", {}).get("username", "unknown")
+        content = msg.get("content", "")
+        embeds = msg.get("embeds", [])
+        print(f"  - {author}: content={len(content)} chars, embeds={len(embeds)}")
     
     # Parse prices
     prices = parse_spawner_prices(messages)
@@ -114,6 +133,7 @@ def main():
             {
                 "id": msg["id"],
                 "content": msg.get("content", ""),
+                "embeds": msg.get("embeds", []),
                 "timestamp": msg.get("timestamp", ""),
                 "author": msg.get("author", {}).get("username", "unknown")
             }
