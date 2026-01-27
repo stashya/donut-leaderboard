@@ -5,7 +5,7 @@ import requests
 from datetime import datetime
 
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
-CHANNEL_ID = "1373579452998746155"  # The spawner prices channel
+CHANNEL_ID = "1370076214986801332"  # Coconut Spawners prices channel
 
 def fetch_latest_messages(limit=10):
     """Fetch the latest messages from the Discord channel."""
@@ -34,19 +34,22 @@ def parse_spawner_prices(messages):
     """
     Parse spawner prices from messages.
     
-    Expected format:
-    > - <:SkeletonFace:1379787344495771698>Skeleton Spawners  **1.2m** each
-    > - Spider Spawners **450k** each
+    New format:
+    - Skeleton: 2.2m
+    - Iron Golem: 2.3m
+    - Zombie 450k
     """
     data = {
-        "buying": {},   # Prices when YOU sell TO them
-        "selling": {}   # Prices when YOU buy FROM them
+        "buying": {},   # Prices when WE BUY (you sell to them)
     }
     
-    # Regex to extract spawner name and price
-    # Matches lines with spawner type and **price** each
+    # Remove custom Discord emojis for cleaner parsing
+    emoji_pattern = re.compile(r'<a?:\w+:\d+>')
+    
+    # Pattern to match: "- Name: price" or "- Name price"
+    # Handles both "Skeleton: 2.2m" and "Zombie 450k" formats
     price_pattern = re.compile(
-        r'([A-Za-z\s]+?)\s*Spawners?\s+\*\*([0-9.]+[kmb]?(?:\s*-\s*[0-9.]+[kmb])?)\*\*\s*each',
+        r'-\s*([A-Za-z\s]+?)[:.]?\s*([0-9.]+[kmb]?)\s*(?:\$|$)',
         re.IGNORECASE
     )
     
@@ -55,48 +58,32 @@ def parse_spawner_prices(messages):
         timestamp = msg.get("timestamp", "")
         author = msg.get("author", {}).get("username", "unknown")
         
-        # Remove custom Discord emojis for cleaner parsing
-        content_clean = re.sub(r'<a?:\w+:\d+>', '', content)
+        # Skip if not a price message
+        if "spawner prices" not in content.lower():
+            continue
         
-        # Determine current section (buying vs selling)
-        current_section = None
+        # Remove custom Discord emojis
+        content_clean = emoji_pattern.sub('', content)
+        
+        print(f"Processing message from {author}:")
         
         for line in content_clean.split("\n"):
-            line_lower = line.lower()
-            
-            # Detect section headers
-            if "buying" in line_lower and "you sell" in line_lower:
-                current_section = "buying"
-                continue
-            elif "selling" in line_lower and ("we sell" in line_lower or "you buy" in line_lower):
-                current_section = "selling"
-                continue
-            
-            # Try to extract price
             match = price_pattern.search(line)
             if match:
-                spawner_type = match.group(1).strip()
+                spawner_type = match.group(1).strip().title()
                 price = match.group(2).strip().lower()
                 
-                # Normalize spawner type name
-                spawner_type = spawner_type.title().strip()
-                
-                # Skip empty names
+                # Skip empty or too short names
                 if not spawner_type or len(spawner_type) < 2:
                     continue
                 
-                section = current_section or "unknown"
-                
-                data[section][spawner_type] = {
+                data["buying"][spawner_type] = {
                     "price": price,
                     "source_timestamp": timestamp,
                     "author": author
                 }
                 
-                print(f"  Found: {spawner_type} = {price} ({section})")
-    
-    # Remove empty sections
-    data = {k: v for k, v in data.items() if v}
+                print(f"  Found: {spawner_type} = {price}")
     
     return data
 
@@ -120,6 +107,7 @@ def main():
     output = {
         "updated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "channel_id": CHANNEL_ID,
+        "source": "Coconut Spawners",
         "total_prices": total_prices,
         "prices": prices,
         "raw_messages": [
