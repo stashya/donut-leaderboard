@@ -122,26 +122,16 @@ def main():
     # Count total prices found
     total_prices = sum(len(section) for section in prices.values())
     
-    # Create output
+    # Create output (will be encrypted by encrypt.py)
     output = {
         "updated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "channel_id": CHANNEL_ID,
         "source": "Coconut Spawners",
         "total_prices": total_prices,
-        "prices": prices,
-        "raw_messages": [
-            {
-                "id": msg["id"],
-                "content": msg.get("content", ""),
-                "embeds": msg.get("embeds", []),
-                "timestamp": msg.get("timestamp", ""),
-                "author": msg.get("author", {}).get("username", "unknown")
-            }
-            for msg in messages
-        ]
+        "prices": prices
     }
     
-    # Save to file
+    # Save to file (encrypt.py will encrypt this)
     with open("spawner_prices.json", "w") as f:
         json.dump(output, f, indent=2)
     
