@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
       
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests cryptography
       
       - name: Run leaderboard scraper
         run: python scraper.py
@@ -33,10 +33,20 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python discord_scraper.py
       
+      - name: Encrypt data files
+        env:
+          ENCRYPTION_KEY_V1: ${{ secrets.ENCRYPTION_KEY_V1 }}
+        run: python encrypt.py
+      
+      - name: Clean up unencrypted files
+        run: |
+          rm -f all_leaderboards.json spawner_prices.json
+          rm -f top1000.json usernames.json
+      
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add top1000.json usernames.json all_leaderboards.json spawner_prices.json
-          git diff --staged --quiet || git commit -m "Update leaderboard and prices $(date -u +%Y-%m-%d)"
+          git add config.json data/
+          git diff --staged --quiet || git commit -m "Update encrypted data $(date -u +%Y-%m-%d)"
           git push
