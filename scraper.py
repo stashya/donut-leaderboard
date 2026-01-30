@@ -59,7 +59,7 @@ def fetch_top_10(leaderboard_type):
     return players[:10]
 
 def main():
-    # Fetch money leaderboard (full top 1000 for existing functionality)
+    # Fetch money leaderboard (full top 1000)
     money_players = fetch_money_leaderboard()
     
     # Build combined leaderboards structure
@@ -82,25 +82,9 @@ def main():
         "leaderboards": all_leaderboards
     }
     
-    # Save combined leaderboards file
+    # Save combined leaderboards file (will be encrypted by encrypt.py)
     with open("all_leaderboards.json", "w") as f:
         json.dump(output, f, indent=2)
-    
-    # Also maintain backwards compatibility with existing files
-    # top1000.json for money leaderboard
-    money_output = {
-        "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "count": len(money_players),
-        "players": money_players
-    }
-    
-    with open("top1000.json", "w") as f:
-        json.dump(money_output, f, indent=2)
-    
-    # Simple username list
-    usernames = [p["username"] for p in money_players if p.get("username")]
-    with open("usernames.json", "w") as f:
-        json.dump(usernames, f)
     
     print(f"\nDone!")
     print(f"Money leaderboard: {len(money_players)} players")
