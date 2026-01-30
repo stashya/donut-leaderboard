@@ -1,0 +1,13 @@
+{
+  "current_data_version": 1,
+  "versions": {
+    "1": {
+      "status": "active",
+      "min_mod_version": "1.4.0",
+      "files": {
+        "leaderboards": "data/leaderboards_v1.json.enc",
+        "prices": "data/prices_v1.json.enc"
+      }
+    }
+  }
+}
