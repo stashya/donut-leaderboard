@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "enabled": true,
+  "enabled": false,
   "ads": [
     {
       "id": "spawner_shop_v1",
-      "enabled": false,
+      "enabled": true,
       "priority": 10,
       "trigger": {
         "type": "holding_item",
