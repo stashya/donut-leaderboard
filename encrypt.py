@@ -42,8 +42,10 @@ def encrypt_file(input_path: str, output_path: str):
     # Encrypt (AESGCM automatically appends auth tag)
     ciphertext = aesgcm.encrypt(nonce, plaintext, None)
     
-    # Combine nonce + ciphertext and base64 encode
-    encrypted_data = base64.b64encode(nonce + ciphertext).decode('utf-8')
+    # Encode nonce and ciphertext separately, join with colon
+    nonce_b64 = base64.b64encode(nonce).decode('utf-8')
+    ciphertext_b64 = base64.b64encode(ciphertext).decode('utf-8')
+    encrypted_data = f"{nonce_b64}:{ciphertext_b64}"
     
     # Write output
     with open(output_path, 'w') as f:
