@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 """
 Key Generator for DonutUtility Data Protection
-
 Run this script when you need to rotate to a new data version (scram).
 It will generate:
 1. A new encryption key for GitHub Actions
 2. Obfuscated key parts for the Java mod
-
 Usage:
     python3 generate_key.py [version_number]
     
 Example:
     python3 generate_key.py 2
 """
-
 import secrets
 import sys
 
@@ -32,8 +29,8 @@ def generate_key_for_version(version: int):
     print(f"   Secret value: {key_hex}")
     print()
     
-    # XOR mask (can be any 8 bytes, using a simple pattern)
-    mask = bytes([0x51, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11])
+    # XOR mask - MUST match KEY_MASK in DataManager.java
+    mask = bytes([0x5b, 0x71, 0x41, 0x11, 0x79, 0x79, 0xab, 0x77])
     
     # Split key into 4 parts and XOR with mask
     parts = []
@@ -43,23 +40,13 @@ def generate_key_for_version(version: int):
         parts.append(obfuscated)
     
     # Generate Java code
-    print("2. UPDATE DataManager.java - Replace the key reconstruction block:")
+    print("2. UPDATE DataManager.java - Replace the key parts:")
     print()
-    print(f"        // Version {version} key parts (obfuscated)")
-    print(f"        if (DATA_VERSION == {version}) {{")
-    print("            return reconstructKey(")
-    print("                // Part 1: bytes 0-7")
-    print(f"                new byte[]{{{format_bytes(parts[0])}}},")
-    print("                // Part 2: bytes 8-15")
-    print(f"                new byte[]{{{format_bytes(parts[1])}}},")
-    print("                // Part 3: bytes 16-23")
-    print(f"                new byte[]{{{format_bytes(parts[2])}}},")
-    print("                // Part 4: bytes 24-31")
-    print(f"                new byte[]{{{format_bytes(parts[3])}}},")
-    print("                // XOR mask")
-    print(f"                new byte[]{{{format_bytes(mask)}}}")
-    print("            );")
-    print("        }")
+    print(f"    private static final byte[] KEY_PART_1 = {{{format_bytes(parts[0])}}};")
+    print(f"    private static final byte[] KEY_PART_2 = {{{format_bytes(parts[1])}}};")
+    print(f"    private static final byte[] KEY_PART_3 = {{{format_bytes(parts[2])}}};")
+    print(f"    private static final byte[] KEY_PART_4 = {{{format_bytes(parts[3])}}};")
+    print(f"    private static final byte[] KEY_MASK   = {{{format_bytes(mask)}}};")
     print()
     
     # Update instructions
