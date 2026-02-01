@@ -4,7 +4,7 @@
   "ads": [
     {
       "id": "spawner_shop_v1",
-      "enabled": true,
+      "enabled": false,
       "priority": 10,
       "trigger": {
         "type": "holding_item",
