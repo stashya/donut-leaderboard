@@ -11,9 +11,9 @@
         "items": ["minecraft:spawner"]
       },
       "display": {
-        "title": "§aSell your spawners!",
-        "subtitle": "§7Best prices guaranteed",
-        "link": "discord.gg/iditity",
+        "title": "§aWant to collab/put an Ad here?",
+        "subtitle": "§7Open a Ticket on Discord!",
+        "link": "discord.gg/WRYwZxJx",
         "icon_url": "https://raw.githubusercontent.com/stashya/donutsmp-leaderboard/main/ads/shop_icon.png"
       }
     },
@@ -25,9 +25,9 @@
         "type": "echest_open"
       },
       "display": {
-        "title": "§6Need to sell items?",
-        "subtitle": "§7We buy everything!",
-        "link": "discord.gg/iditity",
+        "title": "§6Want to collab/put an Ad here?",
+        "subtitle": "§7Open a Ticket on Discord!",
+        "link": "discord.gg/WRYwZxJx",
         "icon_url": "https://raw.githubusercontent.com/stashya/donutsmp-leaderboard/main/ads/shop_icon.png"
       }
     }
