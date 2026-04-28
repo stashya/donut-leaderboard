@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-API_KEY = "41c9e4c6c3b44e38a06ce3e72ba3f7a5"
+API_KEY = "c749568157594992ac0f4a454697471e"
 BASE_URL = "https://api.donutsmp.net/v1/leaderboards"
 
 # All leaderboard types
